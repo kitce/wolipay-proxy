@@ -1,6 +1,6 @@
 import { middleware as cache } from 'apicache';
 import express from 'express';
-import httpProxy from 'http-proxy';
+import { createProxyServer } from 'http-proxy';
 import morgan from 'morgan';
 import { target } from './config/proxy';
 
@@ -9,7 +9,7 @@ interface IConfig {
 }
 
 const proxy = (config: IConfig) => {
-  const proxy = httpProxy.createProxyServer({
+  const proxy = createProxyServer({
     target,
     secure: false,
     changeOrigin: true
