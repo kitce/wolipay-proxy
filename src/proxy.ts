@@ -1,14 +1,25 @@
 import { middleware as cache } from 'apicache';
-import express from 'express';
+import express, { Express } from 'express';
 import { createProxyServer } from 'http-proxy';
 import morgan from 'morgan';
+import * as config from './config/config';
 import { target } from './config/proxy';
 
-interface IConfig {
+interface IProxyConfig {
+  port?: number;
+}
+
+export interface IProxy {
+  app: Express;
   port: number;
 }
 
-const proxy = (config: IConfig) => {
+const proxy = (options: IProxyConfig = {}): IProxy => {
+  const _config = {
+    ...options,
+    ...config
+  };
+
   const proxy = createProxyServer({
     target,
     secure: false,
@@ -24,11 +35,12 @@ const proxy = (config: IConfig) => {
     proxy.web(req, res);
   });
 
-  app.listen(config.port, () => {
-    console.info('Proxy server listening on', config.port);
+  const { port } = _config;
+  app.listen(port, () => {
+    console.info('Wolipay proxy server listening on', port);
   });
 
-  return app;
+  return { app, port };
 };
 
 export default proxy;

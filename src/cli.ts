@@ -1,5 +1,5 @@
 #!/usr/bin/env node
 import proxy from './proxy';
-import config from './config/config';
+import * as config from './config/config';
 
 proxy(config);

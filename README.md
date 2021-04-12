@@ -10,22 +10,36 @@ $ yarn add wolipay-proxy
 
 ## Usage
 
+### Programmatic
+
+`(options: IProxyConfig = {}) => IProxy`
+```ts
+import proxy from 'wolipay-proxy';
+const { app, port } = proxy();
+```
+
+#### Types
+```ts
+interface IProxyConfig {
+  port?: number;
+}
+
+interface IProxy {
+  app: Express;
+  port: number;
+}
+```
+
 ### Command Line Interface
 ```bash
 $ yarn global add wolipay-proxy
 $ wolipay-proxy
 ```
 
-### Programmatic
-```ts
-import proxy from 'wolipay-proxy';
-proxy();
-```
-
-### Environment variables
+#### Environment variables
 | Variable | Default | Required |
-| - | - | - |
-| `PORT` | 612 | No |
+| -------- | ------- | -------- |
+| `PORT`   | `612`   | No       |
 
 ## Build
 
