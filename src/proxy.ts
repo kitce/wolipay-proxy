@@ -1,6 +1,6 @@
 import { middleware as cache } from 'apicache';
 import express from 'express';
-import httpProxy, { ServerOptions } from 'http-proxy';
+import httpProxy from 'http-proxy';
 import morgan from 'morgan';
 import { target } from './config/proxy';
 
